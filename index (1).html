@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vijay — SEO Executive</title>
+<meta name="description" content="Vijay — SEO Executive specializing in AI-driven SEO, AEO, Local & International SEO. On-page, off-page, technical audits and measurable organic growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A;
+    --bg-soft:#111111;
+    --card:#1C1C1C;
+    --card-hi:#232323;
+    --gold:#D4AF37;
+    --gold-light:#F4D35E;
+    --white:#FFFFFF;
+    --gray:#B0B0B0;
+    --line:#2A2A26;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+  ::selection{ background:var(--gold); color:var(--bg); }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 32px; position:relative; z-index:2; }
+
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* ---------- AMBIENT BACKGROUND ---------- */
+  .ambient{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(90px); opacity:0.16;
+    background:radial-gradient(circle, var(--gold), transparent 70%);
+  }
+  .blob-1{ width:520px; height:520px; top:-160px; left:-120px; animation:drift1 22s ease-in-out infinite; }
+  .blob-2{ width:420px; height:420px; bottom:-140px; right:-100px; animation:drift2 26s ease-in-out infinite; }
+  .blob-3{ width:340px; height:340px; top:40%; left:60%; opacity:0.10; animation:drift1 30s ease-in-out infinite reverse; }
+  @keyframes drift1{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(60px,40px) scale(1.12); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-50px,-30px) scale(1.08); }
+  }
+
+  .spotlight{
+    position:fixed; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(600px circle at var(--mx,50%) var(--my,20%), rgba(212,175,55,0.07), transparent 40%);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,10,10,0.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .nav-logo{ font-family:'Space Grotesk'; font-weight:700; font-size:1.05rem; }
+  .nav-logo span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:28px; list-style:none; font-size:0.88rem; }
+  .nav-links a{
+    font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gray);
+    position:relative; padding:4px 0;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light));
+    transition:width .25s ease;
+  }
+  .nav-links a:hover{ color:var(--gold-light); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    font-family:'IBM Plex Mono'; font-size:0.78rem;
+    border:1px solid var(--gold); color:var(--gold-light);
+    padding:8px 16px; border-radius:999px; white-space:nowrap;
+    transition:box-shadow .25s ease, background .25s ease, color .25s ease;
+  }
+  .nav-cta:hover{ background:var(--gold); color:var(--bg); box-shadow:0 0 24px rgba(212,175,55,0.45); }
+
+  /* ---------- HERO ---------- */
+  header.hero{ padding:96px 0 70px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; }
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gold-light);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+    opacity:0; animation:fadeUp .8s ease forwards;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--gold); }
+
+  h1.name{
+    font-size:clamp(2.6rem, 5vw, 4.2rem); font-weight:700; line-height:1.02;
+    background:linear-gradient(100deg, var(--white) 20%, var(--gold-light) 45%, var(--gold) 55%, var(--white) 80%);
+    background-size:220% auto;
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    animation:shimmer 5s linear infinite, fadeUp .8s ease .1s forwards;
+    opacity:0;
+  }
+  @keyframes shimmer{ to{ background-position:-220% center; } }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:translateY(0);} }
+
+  .role{
+    font-family:'IBM Plex Mono'; font-size:1rem; color:var(--gray);
+    margin-top:18px; max-width:34ch;
+    opacity:0; animation:fadeUp .8s ease .2s forwards;
+  }
+  .role strong{ color:var(--white); font-weight:600; }
+  .hero-desc{
+    margin-top:22px; max-width:46ch; color:var(--gray); font-size:0.98rem;
+    opacity:0; animation:fadeUp .8s ease .3s forwards;
+  }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s ease .4s forwards; }
+  .btn{
+    font-family:'IBM Plex Mono'; font-size:0.82rem;
+    padding:13px 24px; border-radius:999px; border:1px solid var(--gold);
+    transition:transform .2s ease, box-shadow .2s ease;
+    position:relative;
+  }
+  .btn-solid{ background:linear-gradient(120deg,var(--gold),var(--gold-light)); color:var(--bg); font-weight:600; border:none; animation:pulseGlow 2.6s ease-in-out infinite; }
+  .btn-solid:hover{ transform:translateY(-3px); box-shadow:0 12px 30px -8px rgba(212,175,55,0.55); }
+  @keyframes pulseGlow{
+    0%,100%{ box-shadow:0 0 0 rgba(212,175,55,0.0); }
+    50%{ box-shadow:0 0 26px rgba(212,175,55,0.35); }
+  }
+  .btn-outline{ color:var(--gold-light); }
+  .btn-outline:hover{ background:var(--gold); color:var(--bg); transform:translateY(-3px); }
+
+  .hero-meta{ display:flex; gap:22px; margin-top:36px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s ease .5s forwards; }
+  .hero-meta div{ font-family:'IBM Plex Mono'; font-size:0.76rem; color:var(--gray); }
+  .hero-meta b{ display:block; color:var(--gold-light); font-family:'Space Grotesk'; font-size:1.3rem; }
+
+  /* ---------- SERP WIDGET (signature element) ---------- */
+  .serp{
+    background:linear-gradient(180deg,var(--card),var(--card-hi));
+    border:1px solid var(--line); border-radius:16px; padding:22px;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.05);
+    opacity:0; animation:fadeUp .9s ease .35s forwards;
+    position:relative; overflow:hidden;
+  }
+  .serp::before{
+    content:''; position:absolute; inset:-1px; border-radius:16px; padding:1px;
+    background:linear-gradient(120deg, transparent 30%, rgba(212,175,55,0.5), transparent 70%);
+    background-size:220% 220%;
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:borderSheen 4.5s linear infinite;
+  }
+  @keyframes borderSheen{ to{ background-position:-220% -220%; } }
+  .serp-bar{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line); border-radius:999px; padding:10px 16px;
+    font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gray);
+  }
+  .serp-bar .dot{ width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px var(--gold); animation:blink 1.8s ease-in-out infinite; }
+  @keyframes blink{ 0%,100%{ opacity:1;} 50%{ opacity:0.4;} }
+  .serp-result{ margin-top:20px; padding-top:18px; border-top:1px dashed var(--line); }
+  .serp-url{ font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gold-light); }
+  .serp-title{ font-family:'Space Grotesk'; font-size:1.08rem; margin-top:4px; font-weight:600; color:var(--white); }
+  .serp-snippet{ font-size:0.86rem; color:var(--gray); margin-top:6px; }
+  .serp-rankrow{ margin-top:18px; display:flex; align-items:center; justify-content:space-between; }
+  .serp-rank{
+    font-family:'IBM Plex Mono'; font-size:2.4rem; font-weight:600; line-height:1;
+    background:linear-gradient(120deg,var(--gold),var(--gold-light));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .serp-rank-label{ font-family:'IBM Plex Mono'; font-size:0.7rem; color:var(--gray); }
+  .serp-chart{ width:120px; height:44px; }
+  .serp-chart path{
+    fill:none; stroke:var(--gold); stroke-width:2;
+    stroke-dasharray:220; stroke-dashoffset:220;
+    animation:draw 1.8s .3s ease forwards;
+    filter:drop-shadow(0 0 4px rgba(212,175,55,0.6));
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* ---------- MARQUEE STRIP ---------- */
+  .marquee-strip{
+    border-bottom:1px solid var(--line); background:var(--bg-soft);
+    padding:16px 0; overflow:hidden;
+  }
+  .marquee-track{
+    display:flex; gap:48px; width:max-content;
+    animation:scrollX 26s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'IBM Plex Mono'; font-size:0.82rem; color:var(--gray);
+    display:flex; align-items:center; gap:10px; white-space:nowrap;
+  }
+  .marquee-track span::before{ content:'✦'; color:var(--gold); }
+  @keyframes scrollX{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:44px; }
+  .section-head h2{ font-size:1.9rem; }
+  .section-head .tag{
+    font-family:'IBM Plex Mono'; font-size:0.75rem; color:var(--gold-light);
+    border:1px solid var(--line); padding:5px 12px; border-radius:999px;
+  }
+  .section-line{
+    height:1px; width:0; background:linear-gradient(90deg,var(--gold),transparent);
+    margin-bottom:30px; transition:width 1s ease;
+  }
+  .reveal.in .section-line{ width:100%; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 0.7fr; gap:48px; }
+  .about-grid p{ font-size:1.02rem; color:var(--gray); max-width:58ch; }
+  .about-stats{ display:grid; gap:18px; }
+  .stat{
+    border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+    background:var(--card); transition:border-color .25s ease, transform .25s ease;
+  }
+  .stat:hover{ border-color:var(--gold); transform:translateX(4px); }
+  .stat b{ font-family:'Space Grotesk'; font-size:1.5rem; display:block; color:var(--gold-light); }
+  .stat span{ font-family:'IBM Plex Mono'; font-size:0.74rem; color:var(--gray); }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ display:flex; flex-direction:column; gap:0; }
+  .tl-item{
+    display:grid; grid-template-columns:170px 1fr; gap:32px;
+    padding:28px 0; border-top:1px solid var(--line);
+    transition:padding-left .25s ease;
+  }
+  .tl-item:hover{ padding-left:8px; }
+  .tl-item:first-child{ border-top:none; }
+  .tl-date{ font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gold-light); padding-top:3px; }
+  .tl-role{ font-family:'Space Grotesk'; font-size:1.2rem; font-weight:600; }
+  .tl-org{ font-family:'IBM Plex Mono'; font-size:0.8rem; color:var(--gray); margin-top:4px; }
+  .tl-desc{ margin-top:10px; color:var(--gray); font-size:0.94rem; max-width:64ch; }
+  .tl-tools{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .tl-tools span{
+    font-family:'IBM Plex Mono'; font-size:0.7rem; background:var(--card);
+    border:1px solid var(--line); padding:4px 10px; border-radius:999px; color:var(--gray);
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .tl-tools span:hover{ border-color:var(--gold); color:var(--gold-light); }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .skill-group h3{
+    font-family:'IBM Plex Mono'; font-size:0.8rem; color:var(--gray);
+    text-transform:uppercase; letter-spacing:0.04em; margin-bottom:16px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family:'IBM Plex Mono'; font-size:0.82rem;
+    background:var(--card); border:1px solid var(--line);
+    padding:9px 16px; border-radius:999px; cursor:default; color:var(--gray);
+    transition:background .2s ease, color .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .chip:hover{
+    background:linear-gradient(120deg,var(--gold),var(--gold-light));
+    color:var(--bg); border-color:var(--gold); transform:translateY(-3px) scale(1.03);
+    box-shadow:0 10px 24px -10px rgba(212,175,55,0.6);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .proj-card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px; transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    position:relative;
+  }
+  .proj-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 28px 50px -26px rgba(212,175,55,0.25);
+    border-color:var(--gold);
+  }
+  .proj-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .proj-url{ font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gold-light); }
+  .proj-badge{
+    font-family:'IBM Plex Mono'; font-size:0.65rem; color:var(--gold);
+    border:1px solid var(--gold); border-radius:999px; padding:3px 9px; white-space:nowrap;
+  }
+  .proj-title{ font-family:'Space Grotesk'; font-size:1.1rem; font-weight:600; margin-top:10px; color:var(--white); }
+  .proj-desc{ font-size:0.86rem; color:var(--gray); margin-top:6px; }
+  .proj-visit{
+    display:inline-block; margin-top:14px; font-family:'IBM Plex Mono'; font-size:0.74rem;
+    color:var(--white); border-bottom:1px solid var(--gray);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .proj-visit:hover{ color:var(--gold-light); border-color:var(--gold-light); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-list{ display:grid; gap:0; }
+  .edu-item{
+    display:grid; grid-template-columns:170px 1fr; gap:32px;
+    padding:20px 0; border-top:1px solid var(--line);
+  }
+  .edu-item:first-child{ border-top:none; }
+  .edu-date{ font-family:'IBM Plex Mono'; font-size:0.78rem; color:var(--gold-light); }
+  .edu-name{ font-family:'Space Grotesk'; font-weight:600; }
+  .edu-org{ font-family:'IBM Plex Mono'; font-size:0.8rem; color:var(--gray); margin-top:2px; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{ padding:80px 0 48px; }
+  .contact-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:48px; align-items:end; }
+  footer h2{
+    font-size:2.2rem; max-width:14ch;
+    background:linear-gradient(100deg,var(--white),var(--gold-light));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .contact-links{ display:grid; gap:14px; }
+  .contact-links a{
+    font-family:'IBM Plex Mono'; font-size:0.9rem; display:flex; justify-content:space-between;
+    border-bottom:1px solid var(--line); padding-bottom:10px; color:var(--gray);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .contact-links a:hover{ color:var(--gold-light); border-color:var(--gold); }
+  .foot-note{
+    margin-top:60px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-family:'IBM Plex Mono'; font-size:0.72rem; color:var(--gray);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .hero-grid, .about-grid, .skill-groups, .proj-grid, .contact-grid{ grid-template-columns:1fr; }
+    header.hero{ padding:56px 0 44px; }
+    .tl-item, .edu-item{ grid-template-columns:1fr; gap:8px; }
+    section{ padding:56px 0; }
+    .wrap{ padding:0 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+<div class="spotlight" id="spotlight"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-logo">Vijay<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#education">education</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">SEO EXECUTIVE · BASED IN DELHI, INDIA</div>
+      <h1 class="name">Vijay</h1>
+      <p class="role">AI-Driven SEO, AEO, <strong>Local &amp; International SEO</strong> — turning search traffic into a repeatable growth channel.</p>
+      <p class="hero-desc">Digital marketing professional with hands-on experience across on-page/off-page optimization, backlink strategy, keyword research and technical site audits — using Ahrefs, SEMrush, Screaming Frog and Google Search Console to drive measurable organic growth.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#projects">View projects</a>
+        <a class="btn btn-outline" href="mailto:vija9289835700@gmail.com">Hire me</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>8+</b>live SEO projects</div>
+        <div><b>1 yr</b>hands-on experience</div>
+        <div><b>4</b>core SEO tools</div>
+      </div>
+    </div>
+
+    <div class="serp" id="serpWidget">
+      <div class="serp-bar"><span class="dot"></span> site:yourbrand.com — organic ranking</div>
+      <div class="serp-result">
+        <div class="serp-url">www.yourbrand.com</div>
+        <div class="serp-title">Ranked, optimized, and still climbing</div>
+        <div class="serp-snippet">On-page fixes, backlink strategy and technical audits — the same playbook run across VPNs, SaaS tools and e-commerce brands.</div>
+      </div>
+      <div class="serp-rankrow">
+        <div>
+          <div class="serp-rank" id="rankNum">47</div>
+          <div class="serp-rank-label">CURRENT POSITION</div>
+        </div>
+        <svg class="serp-chart" viewBox="0 0 120 44">
+          <path d="M2,40 L20,34 L38,36 L56,20 L74,22 L92,8 L118,4" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>ON-PAGE SEO</span><span>OFF-PAGE SEO</span><span>TECHNICAL AUDITS</span><span>KEYWORD RESEARCH</span><span>LINK BUILDING</span><span>LOCAL SEO</span><span>INTERNATIONAL SEO</span><span>AEO</span>
+    <span>ON-PAGE SEO</span><span>OFF-PAGE SEO</span><span>TECHNICAL AUDITS</span><span>KEYWORD RESEARCH</span><span>LINK BUILDING</span><span>LOCAL SEO</span><span>INTERNATIONAL SEO</span><span>AEO</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-line reveal"></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-head"><h2>About</h2><span class="tag">// who</span></div>
+        <p>I'm a digital marketing professional with a year of hands-on SEO experience, specializing in on-page and off-page optimization, backlink strategy, keyword research and technical site audits. I'm quick to learn, comfortable owning a project end-to-end, and genuinely enjoy the process of moving a page from page three to position one — then proving it with data.</p>
+        <p style="margin-top:16px;">Proficient with Ahrefs, SEMrush, Screaming Frog, Google Search Console and Canva, I've applied that toolkit across VPN products, AI SaaS tools, and e-commerce brands, both as part of an in-house team and freelance.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat"><b>On-Page + Off-Page</b><span>CORE DISCIPLINE</span></div>
+        <div class="stat"><b>Local + International</b><span>SEO SCOPE</span></div>
+        <div class="stat"><b>Ahrefs · SEMrush</b><span>RESEARCH STACK</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><h2>Experience</h2><span class="tag">// work</span></div>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-date">JUN 2025 — PRESENT</div>
+        <div>
+          <div class="tl-role">SEO Intern</div>
+          <div class="tl-org">Web3task Pvt Ltd · Greater Noida, UP</div>
+          <p class="tl-desc">Implemented on-page and off-page SEO strategies, conducted keyword and competitor research, ran site audits and content optimization, and built high-quality backlinks to lift organic rankings and traffic.</p>
+          <div class="tl-tools"><span>Ahrefs</span><span>SEMrush</span><span>Screaming Frog</span><span>Canva</span></div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">MAY 2024 — JAN 2025</div>
+        <div>
+          <div class="tl-role">Sales &amp; Marketing Executive</div>
+          <div class="tl-org">Konnect Awards India · Delhi, Karol Bagh</div>
+          <p class="tl-desc">Presented trophy and award products to prospective customers, understood requirements and recommended suitable options — converting leads into orders and maintaining follow-ups to build long-term relationships.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">JAN 2024 — MAY 2024</div>
+        <div>
+          <div class="tl-role">Order Processing &amp; Return Claim Assistant</div>
+          <div class="tl-org">Amazon Seller · Delhi, Karol Bagh</div>
+          <p class="tl-desc">Managed daily order processing, packaging and dispatch coordination, handled customer return claims, and kept communication smooth with customers and courier services — hands-on exposure to e-commerce backend operations.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><h2>Skills</h2><span class="tag">// keywords</span></div>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h3>Core Practice</h3>
+        <div class="chips">
+          <span class="chip">Digital Marketing</span>
+          <span class="chip">Search Engine Optimization</span>
+          <span class="chip">On-Page</span>
+          <span class="chip">Off-Page</span>
+          <span class="chip">Content Optimization</span>
+          <span class="chip">Link Building</span>
+          <span class="chip">Site Audit</span>
+          <span class="chip">Competitor Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Tools</h3>
+        <div class="chips">
+          <span class="chip">Ahrefs</span>
+          <span class="chip">SEMrush</span>
+          <span class="chip">Screaming Frog</span>
+          <span class="chip">Google Search Console</span>
+          <span class="chip">Canva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><h2>Projects</h2><span class="tag">// live results</span></div>
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">v3vpn.com</span><span class="proj-badge">OFF-PAGE</span></div>
+        <div class="proj-title">Enterprise VPN</div>
+        <p class="proj-desc">Off-page SEO activity for an enterprise VPN product, built through Web3task.</p>
+        <a class="proj-visit" href="https://v3vpn.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">voicetonotes.ai</span><span class="proj-badge">FULL SEO</span></div>
+        <div class="proj-title">Voice to Text</div>
+        <p class="proj-desc">End-to-end SEO for an AI voice-to-text tool — on-page and off-page combined.</p>
+        <a class="proj-visit" href="https://voicetonotes.ai" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">getmylikes.com</span><span class="proj-badge">OFF-PAGE</span></div>
+        <div class="proj-title">SMM Panel</div>
+        <p class="proj-desc">Off-page activity for a social media marketing panel platform.</p>
+        <a class="proj-visit" href="https://getmylikes.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">deepurls.com</span><span class="proj-badge">ON + OFF-PAGE</span></div>
+        <div class="proj-title">Deep Linking Tool</div>
+        <p class="proj-desc">SEO backlink and on-page project for a deep-linking SaaS tool.</p>
+        <a class="proj-visit" href="https://deepurls.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">meetcatch.com</span><span class="proj-badge">OFF-PAGE</span></div>
+        <div class="proj-title">AI Meeting Notes</div>
+        <p class="proj-desc">Off-page SEO activity for an AI meeting-notes product.</p>
+        <a class="proj-visit" href="https://meetcatch.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">traversevpn.com</span><span class="proj-badge">ON + OFF-PAGE</span></div>
+        <div class="proj-title">Traverse VPN</div>
+        <p class="proj-desc">Off-page and on-page SEO project for a second VPN product line.</p>
+        <a class="proj-visit" href="https://traversevpn.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">trophykart.in</span><span class="proj-badge">FREELANCE</span></div>
+        <div class="proj-title">TrophyKart</div>
+        <p class="proj-desc">SEO backlink project delivered as freelance work for an awards &amp; trophy retailer.</p>
+        <a class="proj-visit" href="https://trophykart.in" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-top"><span class="proj-url">prinisha.com</span><span class="proj-badge">FREELANCE</span></div>
+        <div class="proj-title">Prinisha Jewellery</div>
+        <p class="proj-desc">SEO backlink project delivered as freelance work for a jewellery brand.</p>
+        <a class="proj-visit" href="https://prinisha.com" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><h2>Education</h2><span class="tag">// background</span></div>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="edu-date">FEB — SEP 2025</div>
+        <div><div class="edu-name">Digital Marketing Certification</div><div class="edu-org">Ielevate Institute</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-date">2024 — 2025</div>
+        <div><div class="edu-name">B.A. (pursued, not completed)</div><div class="edu-org">Delhi University</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-date">2022 — 2023</div>
+        <div><div class="edu-name">12th Standard (Senior Secondary)</div><div class="edu-org">Govt. Boys Sr. Sec. School, Nathupura, Delhi</div></div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="edu-date">2020 — 2021</div>
+        <div><div class="edu-name">10th Standard</div><div class="edu-org">Govt. Boys Sr. Sec. School, Nathupura, Delhi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap contact-grid">
+    <h2 class="reveal">Let's rank your next project.</h2>
+    <div class="contact-links reveal">
+      <a href="mailto:vija9289835700@gmail.com">Email <span>vija9289835700@gmail.com</span></a>
+      <a href="tel:+919289835700">Phone <span>+91 92898 35700</span></a>
+      <a href="https://www.linkedin.com/in/vijay-430708361" target="_blank" rel="noopener">LinkedIn <span>/in/vijay-430708361</span></a>
+      <a href="#">Location <span>Nathupura, Burari, Delhi</span></a>
+    </div>
+  </div>
+  <div class="wrap foot-note">
+    <span>© <span id="year"></span> Vijay — SEO Executive</span>
+    <span>Built with HTML, CSS &amp; JS</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  const rankEl = document.getElementById('rankNum');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rankEl && !prefersReduced){
+    let current = 47;
+    const target = 1;
+    const step = () => {
+      if(current > target){
+        current -= 1;
+        rankEl.textContent = current;
+        setTimeout(step, current > 10 ? 30 : 90);
+      } else {
+        rankEl.textContent = target;
+      }
+    };
+    setTimeout(step, 400);
+  } else if (rankEl){
+    rankEl.textContent = '1';
+  }
+
+  if(!prefersReduced){
+    const spot = document.getElementById('spotlight');
+    window.addEventListener('mousemove', (e) => {
+      spot.style.setProperty('--mx', e.clientX + 'px');
+      spot.style.setProperty('--my', e.clientY + 'px');
+    });
+  }
+</script>
+
+</body>
+</html>
